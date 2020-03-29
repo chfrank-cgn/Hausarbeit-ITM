@@ -1,0 +1,67 @@
+%
+%	Begrifflichkeiten
+%
+
+\pagebreak
+\section{Infrastructure-as-Code Terms and Concepts}
+
+\onehalfspacing
+
+\subsection{Kubernetes and Cloud Computing}
+
+What exactly is Kubernetes? "Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
+It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices from the community."\footnote{\textit{The Linux Foundation (2019)}: Production-Grade Container Orchestration. \cite{kubernetes}}
+
+Also, according to the National Institute of Standards and Technology (NIST), the key characteristics of cloud computing are: 
+\begin{itemize}
+\item On-demand self-service
+\item Broad network access
+\item Resource pooling
+\item Rapid elasticity
+\item Measured service\footnote{See \textit{Mell, P. (2011)}: The NIST Definition of Cloud Computing. \cite{sp800-145}}
+\end{itemize}
+
+Gartner similarly defines cloud computing as "Cloud computing is a style of computing in which scalable and elastic IT-enabled capabilities are delivered as a service using Internet technologies."\footnote{\textit{Gartner (2019)}: Gartner Glossary - Cloud Computing. \cite{gartnerGlossary}}
+
+Cloud computing is also the foundation for Continuous Integration / Continuous Deployment (CI/CD) in agile software development.
+
+Sitting on top of the Docker container run-time, Kubernetes is the ideal tool to enable cloud computing and CI/CD on Public Cloud as well as for in-house data centers. It provides a rich set of API calls, aimed at application development and deployment, and is an easy tool to use for automated software development.
+
+Kubernetes is widely adopted, not only in the commercial space but also in the military. "It’s a flexible but universal development platform for software teams across the military and prevents vendor-lock in",\footnote{\textit{Chaillan, N. (2019)}: How the U.S. Air Force Deployed Kubernetes. \cite{airForce}} Nicolas Chaillan explained during his presentation on why the US Air Force chose Kubernetes for their F-16 fighter jets.
+
+\subsection{Kubernetes Architecture}
+
+Generally speaking, a Kubernetes cluster consists of one or more logically grouped systems. These systems can be either physical nodes or better, be virtualized, and all of them run a supported container run-time, such as Docker.
+
+A cluster consists of one or more Master nodes, the so-called Control Plane, and one or more worker nodes, the Execution Plane. Most commonly, there are three nodes in the control plane, and three or more nodes in the execution plane, sometimes with different sizing or capabilities. An odd number of nodes should be chosen for the control plane because it's a distributed system and needs to reach quorum on startup.
+
+The control plane takes care of orchestrating the application deployments and maintains their state in a distributed database; the worker nodes execute the actual application containers as defined and scheduled by the control plane.
+
+Kubernetes, in itself, is also a containerized application.
+
+In addition to the compute nodes, Kubernetes also provides an overlay network that allows communication between the cluster nodes, invisible to the outside world, and ingress controllers for applications. Persistent storage, even though it's an anathema to stateless, cloud-native computing, is provided through persistent volumes and storage classes.
+
+All administrative access to a Kubernetes cluster is through the master nodes and the Kubernetes API endpoints it provides. Kubernetes has a command-line interface tool, kubectl, to access the API; a detailed description can be found in the Kubernetes online documentation.\footnote{See \textit{The Linux Foundation (2019)}: Overview of kubectl. \cite{kubectl}} Besides the command line interface, most development pipelines, such as Jenkins, now come with native Kubernetes integration.\footnote{See \textit{Jenkins (2019)}: Kubernetes plugin for Jenkins. \cite{jenkinsK8s}}
+
+\subsection{Kubernetes Terms and Concepts}
+
+The key terms and concepts in Kubernetes are:
+\begin{itemize}
+\item Pod
+\item Replica Set
+\item Service
+\item Deployment
+\item Namespace
+\end{itemize}
+
+A Pod in Kubernetes is the smallest unit that can be deployed (ephemeral primitive). A Pod includes of one or more container images that are always scheduled together on the same node. Each Pod gets a unique IP address, and container images in a pod can speak to each other via localhost.
+
+A Replica Set defines the desired scale and state of a group of pods. Replica sets are not utilized directly; however, the resource is essential as it is the basic building block for application deployments on Kubernetes. Replica sets can (when instructed to) scale up or down to the desired number of pods.
+
+A Service defines a DNS name that refers to a group of pods; the service thus provides a consistent endpoint for that group of pods and aids service discovery. There are different types of services (nodePort, clusterIP, and load balancer); a more detailed explanation would exceed the scope of this paper.
+
+A Deployment is the level of abstraction above replica sets; deployments create and update replica sets and allow to scale applications up or down quickly and perform rolling upgrades if needed. Deployments can also include volume claims for data persistence.
+
+A Namespace is an organizational unit defined within Kubernetes that can group deployments and is used to grant access permissions.
+
+All these items above are defined in plain-text YAML files, which can be kept, together with the application source code, in the central version control system. It is important to note that, except for the actual cluster nodes, all infrastructure definitions (compute, network, storage) have thus moved into the realm and responsibility of the application development teams.

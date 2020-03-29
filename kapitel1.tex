@@ -1,0 +1,45 @@
+%
+%	Einfuehrung
+%
+
+\pagebreak
+\section{Introduction to Infrastructure-as-Code}
+
+\onehalfspacing
+
+\subsection{Enterprise IT}
+
+Ever since the start of the decade, Enterprise IT has undergone a massive transformation towards a utility-like service business. As of 2019, in Enterprise IT, Cloud Computing is now the new norm, according to Gartner Research,\footnote{See \textit{Gartner (2019)}: Cloud computing is the new norm. \cite{gartnerCloudStatement}} and is expected to grow even further.\footnote{See \textit{Gartner (2019)}: Gartner Forecasts Worldwide Public Cloud Revenue. \cite{gartnerForecast}}
+
+In the early days, compute transformation was focused on virtualization, whereas cloud computing now focuses on containerization. Both technologies are quite old, virtualization started in the early 70s, pioneered by IBM, with VM/CMS; the first attempt at containerization was made with the implementation of chroot() for Unix System V in the late 70s.
+
+Outside of the mainframe world, virtualization technologies were not widespread until VMware commoditized virtualization with ESX/ESXi in the early 00s. Around virtualization, a new ecosystem of self-service portals appeared, such as Microfocus' Cloud Service Automation.\footnote{See \textit{Micro Focus (2019)}: Cloud Service Automation. \cite{csaMF}} Enterprise virtualization with a self-service portal is not cloud computing, though - for cloud computing to come to life, the first real open-source cloud operation system, OpenStack was needed, together with the arrival of the major public cloud providers (Amazon Web Services, Microsoft Azure, Google Cloud, Alibaba Cloud).
+
+AWS started initially by providing excess compute capacity to its customers from its internal Amazon platforms, before turning into one of the biggest IT providers worldwide.
+
+With all this raw compute power now available on tap, there is no real reason for Enterprise IT anymore to operate in-house data centers.
+
+\subsection{Container Run-time}
+
+During that time, Docker pioneered the first simple orchestration environment to run containers, on a single node.\footnote{See \textit{Docker (2019)}: Enterprise Container Platform. \cite{docker}} Whereas virtualization is focused on virtual compute instances, containerization focuses on application delivery and deployment; with immutable images and a focus on automation, it targets the development of cloud-native applications.\footnote{See \textit{Wiggins, A. (2017)}: The Twelve-Factor App. \cite{12factor}}
+
+It is crucial to understand the difference: Virtualization was aimed at the infrastructure level, containerization, on the other hand, is aimed at (agile) application development and deployment. Docker, and especially Docker Images, addresses the age-old problem of "works on my machine" by providing a stable and easily deployable run-time environment. It also paves the way for full automation and Infrastructure as Code (IaC).
+
+Docker evolved and spawned other container run-time environments, such as containerd and podman, but they mostly remained focused on executing on a single node. An orchestration framework is needed to orchestrate containers on more than one node. 
+
+\subsection{Container Orchestration Frameworks}
+
+A key feature of cloud-native applications is horizontal scalability - to enable this, a container run-time environment will most likely consist of multiple nodes with shared network and storage interfaces. Horizontal scaling serves two purposes in cloud-native application deployment; it increases throughput and performance through parallel processing and provides for high-availability through redundancy.
+
+Docker does not provide this out of the box, so that's where the various orchestration frameworks come in. 
+
+Here are the most popular in 2019:
+\begin{itemize}
+\item Docker Swarm
+\item Kubernetes
+\item Mesos DC/OS
+\end{itemize}
+
+After Mirantis acquired the Docker Enterprise business, it announced the end of life for Docker Swarm in 2021;\footnote{See \textit{Mirantis (2019)}: What We Announced Today and Why it Matters. \cite{mirantisDocker}} Mesos DC/OS never gathered a large following, so as of the time of writing, CNCF's Kubernetes remains as the only container orchestration framework with a sizable installed base and that is under active development.
+
+In this paper, we'll have a look at one of the challenges posed by introducing Kubernetes as a container orchestration framework into Enterprise IT and showcase a possible solution.

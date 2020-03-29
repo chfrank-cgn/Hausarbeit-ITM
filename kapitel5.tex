@@ -1,0 +1,22 @@
+%
+%	Fazit
+%
+
+\pagebreak
+\section{Summary and recommendations}
+
+\onehalfspacing
+
+As recommended by NIST, most Enterprise IT will most likely end up with more than one Kubernetes cluster in production, either permanently as part of the infrastructure or ephemerally as part of application deployment.
+
+We have seen that Rancher currently provides an excellent tool for Enterprise IT to manage multiple Kubernetes clusters and offers all the necessary capabilities to operate Kubernetes successfully in production. Rancher also provides easy-to-use mechanisms for governance, security, and compliance.
+
+There are other options, though. Google Cloud is enhancing Anthos, AWS has AWS Outposts, and Microsoft Azure has Azure Arc (in preview). These tools aim at extending the management capabilities of the respective cloud provider to other public cloud platforms and in-house data centers, and to provide management of multiple Kubernetes clusters.
+
+For the time being, however, Rancher is the only open-source, provider-independent solution and the recommended choice.
+
+There are upcoming changes on the horizon that threaten infrastructure itself: With the advent of serverless functions and Event-Driven Architecture, new patterns emerge in cloud-native application design that have the potential to render virtualization and containerization obsolete. The leading contenders in this space are AWS Lambda, Google Cloud Run, Google Cloud Functions, and Microsoft Functions.
+
+Also, AWS and Cloudflare are developing new container run-time environments and micro-VMs; the most significant announcement at the end of 2019 was the introduction of Kubernetes on Fargate by AWS.\footnote{See \textit{AWS (2019)}: Run Serverless Kubernetes Pods Using Amazon EKS.\cite{eksFargate}}
+
+There are a lot of developments coming in 2020 with uncertain outcomes, however, what we can still say for sure is that software will eat the world.\footnote{See \textit{Andreessen, M. (2011)}: Why Software Is Eating the World.\cite{softwareEats}}
