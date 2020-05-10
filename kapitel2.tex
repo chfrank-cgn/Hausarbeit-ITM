@@ -3,31 +3,13 @@
 %
 
 \pagebreak
-\section{Infrastructure-as-Code Terms and Concepts}
+\section{The need for Governance and Security in container run-time environments}
 
 \onehalfspacing
 
-\subsection{Kubernetes and Cloud Computing}
+\subsection{Container run-time environments}
 
-What exactly is Kubernetes? "Kubernetes (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
-It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices from the community."\footnote{\textit{The Linux Foundation (2019)}: Production-Grade Container Orchestration. \cite{kubernetes}}
-
-Also, according to the National Institute of Standards and Technology (NIST), the key characteristics of cloud computing are: 
-\begin{itemize}
-\item On-demand self-service
-\item Broad network access
-\item Resource pooling
-\item Rapid elasticity
-\item Measured service\footnote{See \textit{Mell, P. (2011)}: The NIST Definition of Cloud Computing. \cite{sp800-145}}
-\end{itemize}
-
-Gartner similarly defines cloud computing as "Cloud computing is a style of computing in which scalable and elastic IT-enabled capabilities are delivered as a service using Internet technologies."\footnote{\textit{Gartner (2019)}: Gartner Glossary - Cloud Computing. \cite{gartnerGlossary}}
-
-Cloud computing is also the foundation for Continuous Integration / Continuous Deployment (CI/CD) in agile software development.
-
-Sitting on top of the Docker container run-time, Kubernetes is the ideal tool to enable cloud computing and CI/CD on Public Cloud as well as for in-house data centers. It provides a rich set of API calls, aimed at application development and deployment, and is an easy tool to use for automated software development.
-
-Kubernetes is widely adopted, not only in the commercial space but also in the military. "It’s a flexible but universal development platform for software teams across the military and prevents vendor-lock in",\footnote{\textit{Chaillan, N. (2019)}: How the U.S. Air Force Deployed Kubernetes. \cite{airForce}} Nicolas Chaillan explained during his presentation on why the US Air Force chose Kubernetes for their F-16 fighter jets.
+Text
 
 \subsection{Kubernetes Architecture}
 
@@ -41,27 +23,48 @@ Kubernetes, in itself, is also a containerized application.
 
 In addition to the compute nodes, Kubernetes also provides an overlay network that allows communication between the cluster nodes, invisible to the outside world, and ingress controllers for applications. Persistent storage, even though it's an anathema to stateless, cloud-native computing, is provided through persistent volumes and storage classes.
 
-All administrative access to a Kubernetes cluster is through the master nodes and the Kubernetes API endpoints it provides. Kubernetes has a command-line interface tool, kubectl, to access the API; a detailed description can be found in the Kubernetes online documentation.\footnote{See \textit{The Linux Foundation (2019)}: Overview of kubectl. \cite{kubectl}} Besides the command line interface, most development pipelines, such as Jenkins, now come with native Kubernetes integration.\footnote{See \textit{Jenkins (2019)}: Kubernetes plugin for Jenkins. \cite{jenkinsK8s}}
+All administrative access to a Kubernetes cluster is through the master nodes and the Kubernetes API endpoints it provides.
 
-\subsection{Kubernetes Terms and Concepts}
+\subsection{Kubernetes Security}
 
-The key terms and concepts in Kubernetes are:
-\begin{itemize}
-\item Pod
-\item Replica Set
-\item Service
-\item Deployment
-\item Namespace
-\end{itemize}
+Installing the first Kubernetes cluster is not a big task anymore, especially on the three big public cloud providers, which all offer managed Kubernetes clusters with easy, one-click installations.
 
-A Pod in Kubernetes is the smallest unit that can be deployed (ephemeral primitive). A Pod includes of one or more container images that are always scheduled together on the same node. Each Pod gets a unique IP address, and container images in a pod can speak to each other via localhost.
+Designing the platform landscape, however, does need some architectural knowledge and should be planned well in advance.
 
-A Replica Set defines the desired scale and state of a group of pods. Replica sets are not utilized directly; however, the resource is essential as it is the basic building block for application deployments on Kubernetes. Replica sets can (when instructed to) scale up or down to the desired number of pods.
+Once the transition to cloud-native application development begins, the DevOps teams are in place, and application deployment with containers is introduced to IT production, Day Two operations and security become the primary concerns.
 
-A Service defines a DNS name that refers to a group of pods; the service thus provides a consistent endpoint for that group of pods and aids service discovery. There are different types of services (nodePort, clusterIP, and load balancer); a more detailed explanation would exceed the scope of this paper.
+One of the crucial components of security when running containers in production, according to NIST, is the separation in between applications and systems.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
 
-A Deployment is the level of abstraction above replica sets; deployments create and update replica sets and allow to scale applications up or down quickly and perform rolling upgrades if needed. Deployments can also include volume claims for data persistence.
+Segmentation of applications could be performed along the lines of function (Production, Development/Test), or between applications, or both. In single-cluster environments, separation could be achieved through networking or otherwise through the introduction of multiple clusters. 
 
-A Namespace is an organizational unit defined within Kubernetes that can group deployments and is used to grant access permissions.
+A key consideration when implementing separation is the so-called "Blast Radius", a term borrowed from the military, which depicts the amount of damage an explosive would cause. IT uses it to assess the damage a breach, data loss, or failure of a given IT system would cause to the whole operation, in technical and financial terms.
 
-All these items above are defined in plain-text YAML files, which can be kept, together with the application source code, in the central version control system. It is important to note that, except for the actual cluster nodes, all infrastructure definitions (compute, network, storage) have thus moved into the realm and responsibility of the application development teams.
+Defining application and data security classes is part of the preparation process when introducing containers to production, and would exceed the scope of this paper.
+
+Kubernetes itself, at the time of writing, does not provide for hard tenancy. To entirely separate applications on all layers (compute, network, and storage), the use of multiple clusters is a good option. Many enterprises might thus end up with more than one Kubernetes cluster, sometimes with many more, which will, in turn, have a significant effect on operations.
+
+We're observing a trend in Enterprise IT to move from traditional perimeter-based network security to more modern zero- or low-trust networks with identity-based security and temporary infrastructure. Having multiple, short-lived Kubernetes cluster is a likely scenario going forward.
+
+\subsection{Rancher overview}
+
+What is Rancher? According to the Rancher Labs website, it is "[...] a complete software stack for teams adopting containers. It addresses the operational and security challenges of managing multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads"\footnote{\textit{Rancher Labs (2019)}: Run Kubernetes Everywhere. \cite{rancher}}
+
+Rancher provides a management platform to centrally manage multiple Kubernetes clusters in Enterprise IT, all from a user-friendly GUI. Rancher also offers integration tools for application development and robust enterprise-grade features for security and governance. For operations, Rancher provides integrated solutions for logging, monitoring, and auditing, amongst other features.
+
+The Rancher GUI looks like this:
+
+\begin{figure}[H]
+\centering
+\caption {Rancher Overview}
+\includegraphics[width=\linewidth]{images/cluster-overview.png}
+\label{fig:rancherOverview}
+\end{figure}
+
+
+\subsection{Rancher Architecture}
+
+Rancher is, similar to Kubernetes, itself a containerized application and can be installed from a single image to a single Docker host. Such a single-node installation is ideal for testbeds or local Rancher installations on a laptop, for example. A single node installation does not provide any redundancy in case of failure.
+
+For production installations, Rancher can be installed on a Kubernetes cluster, using Kubernetes' redundancy mechanisms for high-availability and resiliency. It could either be co-hosted on an existing cluster or better, on a small, separate infrastructure cluster. It is good practice in IT to keep administrative tools on separate infrastructure from the administered infrastructure, and thus the installation on a different cluster is the most widespread.
+
+In addition to the GUI, the Rancher server also provides a central Kubernetes API endpoint, which acts as an intermediary between the users and the actual Kubernetes clusters.
