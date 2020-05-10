@@ -9,7 +9,7 @@
 
 \subsection{Container run-time environments}
 
-Text
+Text.\footnote{See \textit{The Linux Foundation (2020)}: Production-Grade Container Orchestration. \cite{kubernetes}}
 
 \subsection{Kubernetes Architecture}
 
@@ -35,6 +35,8 @@ Once the transition to cloud-native application development begins, the DevOps t
 
 One of the crucial components of security when running containers in production, according to NIST, is the separation in between applications and systems.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
 
+Text.\footnote{See \textit{Weibel, D. (2020)}: Architecting Kubernetes clusters. \cite{howMany}}
+
 Segmentation of applications could be performed along the lines of function (Production, Development/Test), or between applications, or both. In single-cluster environments, separation could be achieved through networking or otherwise through the introduction of multiple clusters. 
 
 A key consideration when implementing separation is the so-called "Blast Radius", a term borrowed from the military, which depicts the amount of damage an explosive would cause. IT uses it to assess the damage a breach, data loss, or failure of a given IT system would cause to the whole operation, in technical and financial terms.
@@ -44,6 +46,8 @@ Defining application and data security classes is part of the preparation proces
 Kubernetes itself, at the time of writing, does not provide for hard tenancy. To entirely separate applications on all layers (compute, network, and storage), the use of multiple clusters is a good option. Many enterprises might thus end up with more than one Kubernetes cluster, sometimes with many more, which will, in turn, have a significant effect on operations.
 
 We're observing a trend in Enterprise IT to move from traditional perimeter-based network security to more modern zero- or low-trust networks with identity-based security and temporary infrastructure. Having multiple, short-lived Kubernetes cluster is a likely scenario going forward.
+
+Text.\footnote{See \textit{Weizmann, Y. (2020)}: Threat matrix for Kubernetes . \cite{threatMatrix}}
 
 \subsection{Rancher overview}
 
@@ -62,6 +66,8 @@ The Rancher GUI looks like this:
 
 
 \subsection{Rancher Architecture}
+
+Text.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
 
 Rancher is, similar to Kubernetes, itself a containerized application and can be installed from a single image to a single Docker host. Such a single-node installation is ideal for testbeds or local Rancher installations on a laptop, for example. A single node installation does not provide any redundancy in case of failure.
 
