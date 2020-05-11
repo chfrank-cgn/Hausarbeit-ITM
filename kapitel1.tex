@@ -9,14 +9,24 @@
 
 \subsection{Pronouns}
 
-As we're moving towards a more gender-fluid society, it's time to re-think the usage of gendered pronouns in scientific texts. Two well-known professors from UCLA, Abigail C. Saguy and Juliet A. Williams, argue that it makes a lot of sense to use singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary"\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} Throughout this text, I'll attempt to follow that suggestion and invite my readers to do the same for their own papers, and support gender inclusivity through gender neutral language. Thank you!
+As we're moving towards a more gender-fluid society, it's time to re-think the usage of gendered pronouns in scientific texts. Two well-known professors from UCLA, Abigail C. Saguy and Juliet A. Williams, argue that it makes a lot of sense to use singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary."\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} Throughout this text, I'll attempt to follow that suggestion and invite my readers to do the same for their own papers, and support gender inclusivity through gender neutral language. Thank you!
 
-\subsection{Governance}
+\subsection{Governance vs. Compliance}
 
-Text.
+In IT it is quite common to use the terms governance and compliance interchangeably. We use the term governance to refer to the process of defining and adhering to a set of operational standards for the overall IT organization. If we look at the formal definition of IT governance in ISO/IEC 38500:2015 though, it is much more focused on the business aspect of running IT. IT governance, as defined by ISO/IEC, will have a heavy emphasis on budgetary control, financial performance and investments. Adherence to standards, such as the Sarbanes–Oxley Act, is more seen as part of compliance than of governance.
+
+However, both, governance and compliance, are part of the overall governance, risk and compliance (GRC) practice in an IT organization and have to go hand in hand.
+
+Throughout the remainder of the document I will use the term governance to refer to all three aspects, governance, risk and compliance.
 
 \subsection{Security}
 
-Text.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
+Throughout the last decade, IT operations have seen their primary focus shift from an on-premise, dedicated environment to shared, on-demand infrastructure, to cloud computing.
 
-Text.\footnote{See \textit{Mell, P. (2011)}: The NIST Definition of Cloud Computing. \cite{sp800-145}}
+The National Institute of Standards and Technology (NIST) defines cloud computing as "a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction."\footnote{\textit{Mell, P. (2011)}: The NIST Definition of Cloud Computing. \cite{sp800-145}}
+
+In the early days of cloud computing, virtualization played a key role and drove adoption; a couple of years ago the focus shifted away from virtualization towards containerization. All major Hyperscalers now have container run-time offerings, managed and unmanaged, based on the Kubernetes orchestration framework.
+
+Container run-time environments have their own important security aspects, as outlined by NIST.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
+
+For the purpose of this document, we'll concentrate on the aspects of security and governance (regulatory compliance) in container run-time environments.
