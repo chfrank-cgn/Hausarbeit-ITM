@@ -37,12 +37,6 @@ One of the crucial components of security when running containers in production,
 
 Text.\footnote{See \textit{Weibel, D. (2020)}: Architecting Kubernetes clusters. \cite{howMany}}
 
-Segmentation of applications could be performed along the lines of function (Production, Development/Test), or between applications, or both. In single-cluster environments, separation could be achieved through networking or otherwise through the introduction of multiple clusters. 
-
-A key consideration when implementing separation is the so-called "Blast Radius", a term borrowed from the military, which depicts the amount of damage an explosive would cause. IT uses it to assess the damage a breach, data loss, or failure of a given IT system would cause to the whole operation, in technical and financial terms.
-
-Defining application and data security classes is part of the preparation process when introducing containers to production, and would exceed the scope of this paper.
-
 Kubernetes itself, at the time of writing, does not provide for hard tenancy. To entirely separate applications on all layers (compute, network, and storage), the use of multiple clusters is a good option. Many enterprises might thus end up with more than one Kubernetes cluster, sometimes with many more, which will, in turn, have a significant effect on operations.
 
 We're observing a trend in Enterprise IT to move from traditional perimeter-based network security to more modern zero- or low-trust networks with identity-based security and temporary infrastructure. Having multiple, short-lived Kubernetes cluster is a likely scenario going forward.
@@ -63,7 +57,6 @@ The Rancher GUI looks like this:
 \includegraphics[width=\linewidth]{images/cluster-overview.png}
 \label{fig:rancherOverview}
 \end{figure}
-
 
 \subsection{Rancher Architecture}
 
