@@ -60,10 +60,12 @@ The classic Rancher GUI looks like this:
 
 \subsection{Rancher Architecture}
 
-Rancher is, similar to Kubernetes, itself a containerized application and can be installed from a single image to a single Docker host. Such a single-node installation is ideal for testbeds or local Rancher installations on a laptop, for example. A single node installation does not provide any redundancy in case of failure.
+Rancher is, similar to Kubernetes, itself a containerized application and can be installed from a single image to a single Docker host. Such a single-node installation is ideal for test-beds or local Rancher installations on a laptop, for example. A single node installation does not provide any redundancy in case of failure.
 
 For production installations, Rancher can be installed on a Kubernetes cluster, using Kubernetes' redundancy mechanisms for high-availability and resiliency. It could either be co-hosted on an existing cluster or better, on a small, separate infrastructure cluster. It is good practice in IT to keep administrative tools on separate infrastructure from the administered infrastructure, and thus the installation on a different cluster is the most widespread.
 
 In addition to the GUI, the Rancher server also provides a central Kubernetes API endpoint, which acts as an intermediary between the users and the actual Kubernetes clusters.
 
-More details on the Rancher architecture can be found the technical architcure document.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
+More details on the Rancher architecture can be found in Rancher's technical architecture document.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
+
+I covered the aspect of segmentation in more detail in my previous paper on multi-cluster management in Enterprise IT\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} in combination with a deeper introduction into Kubernetes itself.
