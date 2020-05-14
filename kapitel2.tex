@@ -41,7 +41,7 @@ Kubernetes itself, at the time of writing, does not provide for hard tenancy. To
 
 With the increase in popularity, Kubernetes also brings new security challenges that should be considered when designing the IT environment.\footnote{See \textit{Weizmann, Y. (2020)}: Threat matrix for Kubernetes . \cite{threatMatrix}}
 
-We're observing a trend in Enterprise IT to move from traditional perimeter-based network security to more modern zero- or low-trust networks with identity-based security and temporary infrastructure. Having multiple, short-lived Kubernetes cluster is a likely scenario going forward.
+We're observing a trend in Enterprise IT to move from traditional perimeter-based network security to more modern zero- or low-trust networks with identity-based security and temporary infrastructure. Having multiple, short-lived Kubernetes cluster is thus a likely scenario going forward.
 
 \subsection{Rancher overview}
 
@@ -68,4 +68,4 @@ In addition to the GUI, the Rancher server also provides a central Kubernetes AP
 
 More details on the Rancher architecture can be found in Rancher's technical architecture document.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
 
-I covered the aspect of segmentation in more detail in my previous paper on multi-cluster management in Enterprise IT\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} in combination with a deeper introduction into Kubernetes itself.
+I covered the aspect of segmentation in more detail in my previous FOM paper on multi-cluster management in Enterprise IT\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} in combination with a deeper introduction into Kubernetes itself. I also tried to point out, why I believe the combination of Kubernetes and Rancher is a very beneficial one, especially for Enterprise IT.
