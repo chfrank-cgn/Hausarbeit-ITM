@@ -13,13 +13,25 @@
 \usepackage{parskip}
 \usepackage{caption}
 \usepackage{float}
+\usepackage{listings}
 \usepackage{geometry}
  \geometry{a4paper, left=40mm, right=20mm, top=40mm, bottom=20mm}
 \renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\ttdefault}{pcr}
+\renewcommand{\lstlistlistingname}{List of Examples}
+\renewcommand{\lstlistingname}{Example}
 
 % Bildueberschrift oben und rechtsbuendig
-\captionsetup[figure]{labelfont=bf, textfont=bf}
+\captionsetup{labelfont=bf, textfont=bf}
 \captionsetup{justification=raggedright,singlelinecheck=false}
+
+% Blocksatz
+\def\justify{%
+  \rightskip=0pt
+  \spaceskip=0pt
+  \xspaceskip=0pt
+  \relax
+}
 
 %
 %	Hier werden Titel, Bearbeiter und das Datum eingetragen
@@ -78,6 +90,9 @@ This work is licensed under the Creative Commons Attribution 4.0 International L
 \listoffigures				% Abbildungsverzeichnis
 \cleardoublepage
 
+\lstlistoflistings			% Codeverzeichnis
+\cleardoublepage
+
 \input{glossary.tex}
 \printnomenclature[1.5in]          % Abkuerzungsverzeichnis
 \cleardoublepage
@@ -101,6 +116,8 @@ This work is licensed under the Creative Commons Attribution 4.0 International L
 \bibliographystyle{IEEEtranS}	% ieeetran verwenden, damit auch URLs angezeigt werden
 \bibliography{seminar-lit}
 
+\cleardoublepage
+\justify
 \input{erklaerung.tex}
 
 \end{document}
