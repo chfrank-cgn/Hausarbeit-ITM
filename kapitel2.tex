@@ -45,7 +45,7 @@ We're observing a trend in Enterprise IT to move from traditional perimeter-base
 
 \subsection{Rancher Overview}
 
-To easily manage a set of Kubernetes cluster, we can turn to Rancher.
+To easily manage a set of Kubernetes clusters, we can turn to Rancher.
 
 What is Rancher? According to the Rancher Labs website, it is "[...] a complete software stack for teams adopting containers. It addresses the operational and security challenges of managing multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads"\footnote{\textit{Rancher Labs (2019)}: Run Kubernetes Everywhere. \cite{rancher}}
 
@@ -70,4 +70,6 @@ In addition to the GUI, the Rancher server also provides a central Kubernetes AP
 
 More details on the Rancher architecture can be found in Rancher's technical architecture document.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
 
-I covered the aspect of cluster and workload segmentation in more detail in my previous FOM paper on multi-cluster management in Enterprise IT\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} in combination with a deeper introduction into Kubernetes itself. I also made the point that I believe the combination of Kubernetes and Rancher is a very beneficial one, especially for Enterprise IT.
+The open-source Kubernetes run-time threat detection engine Falco, works very well with Rancher.\footnote{See \textit{Shankar, P. (2020)}: Runtime Security in Rancher with Falco. \cite{falcoPsp}}
+
+I've covered the aspect of cluster and workload segmentation in more detail in my previous FOM paper on multi-cluster management in Enterprise IT, in combination with a deeper introduction into Kubernetes itself.\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} I've also made the point there why I view the combination of Kubernetes and Rancher as a very beneficial one, especially for Enterprise IT.

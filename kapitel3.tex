@@ -73,7 +73,12 @@ A fourth, and final option, would be to create clusters completely outside of Te
 
 The first step is to set up the credentials for Rancher. All access to Rancher is controlled from the built-in RBAC controller and every use can create their own API keys.
 
-"Picture"
+\begin{figure}[H]
+\centering
+\caption {Rancher API Key}
+\includegraphics[width=\linewidth]{images/rancher-api-key.png}
+\label{fig:rancherAPI}
+\end{figure}
 
 We'll then take the defined token and create the Rancher provider in our plan file \verb|provider.tf|:
 
@@ -89,9 +94,9 @@ This is all the end-user credential and provider setup we'll need to create the 
 
 \subsection{Cloud Credentials}
 
-It is good practice to keep the provider definitions separate from the main plan, from here on all example plan code will go into the main plan file, \verb|main.tf|. Also, from here on, the example plan code will be for a deployment on Microsoft Azure, but can be easily adapted for Amazon Web Services, for example.
+It is good practice to keep the provider definitions separate from the main plan, from here on all example plan code will go into the main plan file, \verb|main.tf|. Also, from here on, the example plan code will be for a deployment on Microsoft Azure, but it can be easily adapted for Amazon Web Services, for example.
 
-The first template we want to define are the cloud credentials. Regardless of the cloud provider, we need to proved access credentials. These credentials could be created by the user themselves, or better, be preprovisioned by the IT organization.
+The first template we want to define are the cloud credentials. Regardless of the cloud provider, we need to proved access credentials. These credentials could be created by the user themselves, or better, be pre-provisioned by the IT organization.
 
 In our Terraform plan, creating the credentials looks like this:
 
@@ -199,17 +204,17 @@ If you prefer the Rancher GUI, you can create cluster templates there, too:
 
 \subsection{Kubernetes Cluster}
 
-Now we have all the components together to build a Kubernetes cluster, credentials, node and cluster templates. 
+Now we have all the components together to build a Kubernetes cluster - credentials, node and cluster templates. 
 
-A fresh Kubernetes cluster is only a few lines in our plan:
+A fresh Kubernetes cluster is now only a few lines in our plan:
 
 \begin{lstlisting}[caption=Kubernetes Cluster, frame=single, basicstyle=\ttfamily]
 # Rancher cluster
 resource "rancher2_cluster" "cluster_az" {
   name         = "az-${random_id.instance_id.hex}"
   description  = "Terraform"
-  cluster_template_id = rancher2_cluster_template.template_az.id
-  cluster_template_revision_id = rancher2_cluster_template.template_az.default_revision_id
+  cluster_template_id = ...template_az.id
+  cluster_template_revision_id = ...default_revision_id
   depends_on = [rancher2_cluster_template.template_az]
 }
 \end{lstlisting}
@@ -218,9 +223,14 @@ We give our cluster a name and a description, and link it to the three templates
 
 In the Rancher GUI, creating a cluster is equally easy:
 
-"Picture"
+\begin{figure}[H]
+\centering
+\caption {Cluster Creation}
+\includegraphics[width=\linewidth]{images/cluster-creation.png}
+\label{fig:clusterCreation}
+\end{figure}
 
-With predefined templates, creating well-defined Kubernetes clusters is no longer difficult at all and does not require any in-depth knowledge of Kubernetes.
+With predefined templates, creating well-defined Kubernetes clusters is no longer a difficult task at all and it  does not require any in-depth knowledge of Kubernetes.
 
 After successful creation, Rancher provides a dashboard for the newly created cluster:
 
