@@ -9,17 +9,17 @@
 
 \subsection{Terraform}
 
-All major cloud providers have their infrastructure scripting tools, but there's one declarative tool that's available for all infrastructure platforms, on-premise or public, Terraform by HashiCorp.\footnote{See \textit{HashiCorp (2019)}: Deliver infrastructure as code with Terraform. \cite{terraform}}.
+All major cloud providers have their infrastructure scripting tools (Azure Resource Manager, AWS Cloud Formation), but there's one declarative tool that's available for all infrastructure platforms, on-premise or public: Terraform by HashiCorp.\footnote{See \textit{HashiCorp (2019)}: Deliver infrastructure as code with Terraform. \cite{terraform}}.
 
-As of Rancher 2.3, released in October 2012, Rancher has a Terraform provider, and cluster creation and decommissioning can easily be performed from a Terraform plan as part of a move of IT to IaC.\footnote{See \textit{Rancher Labs (2019)}: Introducing the Rancher 2 Terraform Provider. \cite{terraformProvider}}
+As of Rancher 2.3, released in October 2012, Rancher has a stable Terraform provider.\footnote{See \textit{Rancher Labs (2019)}: Introducing the Rancher 2 Terraform Provider. \cite{terraformProvider}} Kubernetes cluster creation and decommissioning can easily be performed from a Terraform plan as part of a move of Enterprise IT to Infrastructure-as-Code.
 
 With Terraform, creating infrastructure becomes as easy as writing a piece of code. Terraform integrates nicely with your existing source code revision systems, such as GitHub or GitLab. It will also make ensure that all infrastructure deployments are repeatable and uniformly executed.
 
-Adding Terraform to the container run-time tool chest of Rancher and Kubernetes is a major benefit and step forward, it will make creation of new Kubernetes clusters so much easier.\footnote{See \textit{Frank, C. (2020)}: Deploy Kubernetes Clusters on Microsoft Azure with Rancher. \cite{deployAzure}}
+Adding Terraform to the container run-time tool chest of Rancher and Kubernetes is a major benefit and huge step forward, as it will make creation of new Kubernetes clusters so much easier.\footnote{See \textit{Frank, C. (2020)}: Deploy Kubernetes Clusters on Microsoft Azure with Rancher. \cite{deployAzure}}
 
 \subsection{Templates}
 
-Another important piece for your Kubernetes tool chest are templates. Templates will allow you to predefine certain configuration items across the organization, which will help a lot when dealing with hardening in the next chapter.
+Another important piece for your Kubernetes tool chest are templates. Templates will allow you to define certain configuration items across the organization, which will help a lot when dealing with hardening in the next chapter. By using templates and establishing policies that make their use mandatory, you can enforce settings and hide some details, such as credentials.
 
 Rancher offers templates on a number of levels:
 
@@ -47,7 +47,7 @@ To create a managed Kubernetes cluster, you'll have to follow the following step
 
 First, within a  Terraform plan, define the Rancher provider. Then, in the Rancher cluster definition, define the GKE, AKS or EKS options and finally have Terraform create the cluster. Terraform will be using the platform API for this.
 
-In this setup, the Kubernetes control plane will be managed by the cloud provider and Rancher's functionality will be somewhat limited.
+In this setup, the Kubernetes control plane will be managed by the cloud provider and Rancher's functionality will be a bit more limited than in the next option.
 
 \subsubsection{Rancher Node-Driver}
 
@@ -63,15 +63,15 @@ If you need more fine-grained control over the underlying infrastructure, Ranche
 
 First, within a  Terraform plan, define both the Rancher provider and an infrastructure provider. Second, in the Rancher cluster definition, define the cloud provider within the RKE cluster options. Then, have Terraform create the cluster nodes with the infrastructure provider and pass the Rancher registration command to cloud-init
 
-Although this is the most flexible approach, Rancher will loose the ability to horizontally scale the node pools, among other features. It also requires that the Terraform plans have access to credentials for the infrastructure provider, which could provide in Rancher centrally in the option above.
+Although this is the most flexible approach, Rancher will loose the ability to horizontally scale the node pools, among other features. It also requires that the Terraform plans have access to credentials for the infrastructure provider, unlike in the option above, where you could provide them centrally in Rancher.
 
 \subsubsection{Import}
 
-A fourth, and final option, would be to create clusters completely outside of Terraform and Rancher and import them later. This is a quite valid option, but outside of the scope of our document as it would require other forms of automation.
+A fourth, and final option, would be to create clusters completely outside of Terraform and Rancher, and manually import them into Rancher later. This is a quite valid option, but outside of the scope of our document as it would require other forms of automation.
 
 \subsection{Rancher Provider}
 
-The first step is to set up the credentials for Rancher. All access to Rancher is controlled from the built-in RBAC controller and every use can create their own API keys.
+Let's start defining our Kubernetes cluster. The first step is to set up the credentials for Rancher. All access to Rancher is controlled from the built-in RBAC controller and every user can create their own API keys.
 
 \begin{figure}[H]
 \centering
@@ -90,13 +90,13 @@ provider "rancher2" {
 }
 \end{lstlisting}
 
-This is all the end-user credential and provider setup we'll need to create the Kubernetes clusters. On \verb|terraform init| the Rancher provider will be downloaded and initialized. 
+This is all the end-user credential and provider setup we'll need to create a Kubernetes cluster. On \verb|terraform init| the Rancher provider library will be downloaded and initialized. 
 
 \subsection{Cloud Credentials}
 
-It is good practice to keep the provider definitions separate from the main plan, from here on all example plan code will go into the main plan file, \verb|main.tf|. Also, from here on, the example plan code will be for a deployment on Microsoft Azure, but it can be easily adapted for Amazon Web Services, for example.
+It is good practice to keep the provider definitions separate from the main plan, so from here on all example plan code will go into the main plan file, \verb|main.tf|. Also, from here on, the example plan code will be specific to a deployment on Microsoft Azure, but you can adapt the code easily for Amazon Web Services, for example.
 
-The first template we want to define are the cloud credentials. Regardless of the cloud provider, we need to proved access credentials. These credentials could be created by the user themselves, or better, be pre-provisioned by the IT organization.
+The first template we want to define are the cloud credentials. Regardless of the cloud provider, we need to provide some for of access credentials. On Microsoft Azure, this has to be done in the form of a service principal. These credentials could be created by the user themselves, or better, be pre-provisioned by the IT organization.
 
 In our Terraform plan, creating the credentials looks like this:
 
@@ -123,9 +123,9 @@ To create credentials we can also use the Rancher GUI with the same input fields
 
 \subsection{Node Templates}
 
-A Kubernetes cluster consists of one or more node pools, at least one for the control plane and one or more for the worker nodes. On a small installation, the control plane and the workers can reside on the same nodes.
+As we've learned earlier, a Kubernetes cluster consists of one or more node pools, at least one for the control plane and one or more for the worker nodes. On a small installation, the control plane and the workers can be in the same node pool.
 
-To create a node pool, we need to define node templates in our plan:
+To create a node pool, we first need to define node templates in our plan:
 
 \begin{lstlisting}[caption=Node Template, frame=single, basicstyle=\ttfamily]
 # Rancher node template
@@ -146,7 +146,7 @@ resource "rancher2_node_template" "template_az" {
 }
 \end{lstlisting}
 
-In this template, we define size, OS image and regional placement of the node. Depending on the future role, we can define them as small or as big as we need them, or define nodes with specialized hardware, such as GPUs, for machine-learning tasks.
+In a node template, we define size, OS image and regional placement of the node. Depending on the future role, we can define them as small or as big as we need them, or define nodes with specialized hardware, such as GPUs, for machine-learning tasks.
 
 We can make the same definition of node pools as above with the Rancher GUI:
 
@@ -156,6 +156,8 @@ We can make the same definition of node pools as above with the Rancher GUI:
 \includegraphics[width=\linewidth]{images/node-template.png}
 \label{fig:nodeTemplate}
 \end{figure}
+
+The actual node pools will be created later, the template only defines their physical characteristics.
 
 \subsection{Cluster Templates}
 
@@ -191,7 +193,7 @@ resource "rancher2_cluster_template" "template_az" {
 }
 \end{lstlisting}
 
-In this template we define all the basic characteristics of our Kubernetes clusters that we want to enforce across the IT organization. In the example above we do not allow that users can bypass Rancher and access the Kubernetes clusters directly, this will give us a solid first line of defense against malicious attacks based on access credentials.
+In this template we define all the basic characteristics of our Kubernetes clusters that we want to enforce across the IT organization. For example, in the plan above, we do not allow that users can bypass Rancher and access the Kubernetes clusters directly. This setting will give us a solid first line of defense against malicious attacks based on access credentials.
 
 If you prefer the Rancher GUI, you can create cluster templates there, too:
 
@@ -219,7 +221,27 @@ resource "rancher2_cluster" "cluster_az" {
 }
 \end{lstlisting}
 
-We give our cluster a name and a description, and link it to the three templates we defined before. That's all that it takes!
+We give our cluster a name and a description, and link it to the three templates we defined before. 
+
+We also need at least one node pool in our plan:
+
+\begin{lstlisting}[caption=Node Pool, frame=single, basicstyle=\ttfamily]
+# Rancher node pool
+resource "rancher2_node_pool" "nodepool_az" {
+  cluster_id = rancher2_cluster.cluster_az.id
+  name = "nodepool"
+  hostname_prefix = "rke-${random_id.instance_id.hex}-"
+  node_template_id = rancher2_node_template.template_az.id
+  quantity = var.numnodes
+  control_plane = true
+  etcd = true
+  worker = true
+}
+\end{lstlisting}
+
+In this example, we define a single node pool, with control plan and worker roles. Now we're done and we can check the syntax of our plan files with \verb|terraform plan|, and then execute the plan with \verb|terraform apply|.
+
+That's all that it takes!
 
 In the Rancher GUI, creating a cluster is equally easy:
 
@@ -230,9 +252,9 @@ In the Rancher GUI, creating a cluster is equally easy:
 \label{fig:clusterCreation}
 \end{figure}
 
-With predefined templates, creating well-defined Kubernetes clusters is no longer a difficult task at all and it  does not require any in-depth knowledge of Kubernetes.
+With predefined templates, creating well-defined Kubernetes clusters is no longer a difficult task at all, and it does no longer require any in-depth knowledge of Kubernetes.
 
-After successful creation, Rancher provides a dashboard for the newly created cluster:
+After successful creation, Rancher provides a convenient dashboard for the newly created cluster:
 
 \begin{figure}[H]
 \centering
