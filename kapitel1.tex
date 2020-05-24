@@ -9,15 +9,15 @@
 
 \subsection{Pronouns}
 
-As we're moving towards a more gender-fluid society, it's time to re-think the usage of gendered pronouns in scientific texts. Two well-known professors from UCLA, Abigail C. Saguy and Juliet A. Williams, argue that it makes a lot of sense to use singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary."\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} Throughout this text, I'll attempt to follow that suggestion and invite my readers to do the same for their own papers, and support gender inclusivity through gender neutral language. A strong focus on diversity and inclusion will benefit your IT organization greatly and assist in in finding and retaining talent. Thank you!
+As we move towards a more gender-fluid society, it's time to rethink the usage of gendered pronouns in scientific texts. Two well-known professors from UCLA, Abigail C. Saguy, and Juliet A. Williams argue that it makes a lot of sense to use singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary."\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} Throughout this text, I'll attempt to follow that suggestion and invite my readers to do the same for their papers, and support gender inclusivity through gender-neutral language. A strong focus on diversity and inclusion will significantly benefit your IT organization and help you find and retain talent. Thank you!
 
 \subsection{Governance vs. Compliance}
 
-In Enterprise IT it is quite common to use the terms governance and compliance interchangeably. In general we use the term governance to refer to the process of defining and adhering to a set of operational standards for the overall IT organization. If we look at the formal definition of IT governance in ISO/IEC 38500:2015 though, IT governance is much more focused on the business aspect of running IT. IT governance, as defined by ISO/IEC, will have a heavy emphasis on budgetary control, financial performance and investments. Adherence to standards, such as the Sarbanes–Oxley Act, is more seen as part of compliance than of governance.
+In Enterprise IT, it is quite common to use the terms governance and compliance interchangeably. In general, we use the term governance to refer to the process of defining and adhering to a set of operational standards for the overall IT organization. If we look at the formal definition of IT governance in ISO/IEC 38500:2015, though, IT governance is much more focused on the business aspect of running IT. As defined by ISO/IEC, IT governance will have a heavy emphasis on budgetary control, financial performance, and investments. Adherence to standards, such as the Sarbanes–Oxley Act, is more seen as part of compliance than of governance.
 
-However, both, governance and compliance, are part of the overall governance, risk and compliance (GRC) practice in an IT organization and have to go hand in hand. Governance will include compliance, and compliance needs governance (oversight).
+However, governance and compliance are part of the overall governance, risk, and compliance (GRC) practice in an IT organization and have to go hand in hand. Governance will include compliance, and compliance needs governance (oversight).
 
-Throughout the remainder of the document I will use the term governance to refer to all three aspects, governance, risk and compliance.
+Throughout the remainder of the document, I will use the term governance to refer to all three aspects, governance, risk, and compliance.
 
 \subsection{Security}
 
@@ -25,12 +25,12 @@ In the last decade, IT operations have seen their primary focus shift from an on
 
 The National Institute of Standards and Technology (NIST) defines cloud computing as "a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction."\footnote{\textit{Mell, P. (2011)}: The NIST Definition of Cloud Computing. \cite{sp800-145}}
 
-In the public cloud space, three major players have emerged: Amazon Web Services, Microsoft Azure and Google Cloud. A big contender is Alibaba Cloud who, like Huawei, struggle with limited acceptance because of their (perceived) relationship to the Chinese government.
+In the public cloud space, three major players have emerged: Amazon Web Services, Microsoft Azure, and Google Cloud. A big contender is Alibaba Cloud who, like Huawei, struggle with limited acceptance because of their (perceived) relationship to the Chinese government.
 
-In the early days of cloud computing, virtualization played a key role and drove adoption; a couple of years ago the technology focus shifted away from virtualization towards containerization and the Kubernetes orchestration framework. All major Hyperscalers now have container run-time offerings, managed and non-managed, based on Kubernetes. Google has a clear advantage here, since they are the original creators of Kubernetes - Kubernetes is a spin-off of an internal orchestration tool, Borg, that Google uses to run google.com.
+In the early days of cloud computing, virtualization played a key role and drove adoption; a couple of years ago, the technology focus shifted away from virtualization towards containerization and the Kubernetes orchestration framework. All major Hyperscalers now have container run-time offerings, managed and non-managed, based on Kubernetes. Google has a clear advantage since they are the original creators of Kubernetes - Kubernetes is a spin-off of an internal orchestration tool, Borg, that Google uses to run google.com.
 
-Container run-time environments have their own important security aspects, as outlined by NIST in their container security guide.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
+Container run-time environments have important security aspects, as outlined by NIST in their container security guide.\footnote{See \textit{Souppaya, M. (2017)}: Application Container Security Guide. \cite{sp800-190}}
 
-For the purpose of this document, we'll concentrate on the aspects of security and governance (regulatory compliance) in container run-time environments, focusing on Kubernetes as it is the dominant choice at the time of writing.
+For this document, we'll concentrate on the aspects of security and governance (regulatory compliance) in container run-time environments, focusing on Kubernetes as it is the dominant choice at the time of writing.
 
-Furthermore, we'll concentrate on the run-time layer itself and not cover hardening aspects of the underlying compute infrastructure. Not that this is not an important topic in itself, it would just exceed the scope of this paper.
+Furthermore, we'll concentrate on the run-time layer itself and not cover hardening aspects of the underlying computing infrastructure. Not that this is not an important topic in itself; it would just exceed the scope of this paper.
