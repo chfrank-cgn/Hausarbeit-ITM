@@ -15,17 +15,17 @@ Earlier competitors, such as Docker Swarm or Mesos DC/OS, have all but vanished.
 
 The original platforms that spawned cloud-native computing and application design and gave us the concept of micro-services, Heroku and Cloud Foundry, have also slightly gone out of favor, or, in the case of Cloud Foundry, moved to a Kubernetes-based run-time. Salesforce.com acquired Heroku in 2010; an independent foundation, led by VMware, owns Cloud Foundry with SUSE playing a very active part.
 
+In a previous paper, I have covered Kubernetes in more detail\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}}, in this paper I will only cover the necessary basics.
+
 \subsection{Kubernetes Architecture}
 
-A Kubernetes container run-time environment, or cluster, in general, will consist of one or more logically grouped systems. These systems can be either physical nodes or better, be virtualized, and all of them will run a supported container run-time, such as Docker (Microsoft / Ubuntu) or Podman (Red Hat).
+A Kubernetes container run-time environment, or cluster, in general, will consist of one or more logically grouped systems. These systems, most likely virtual machines, will run a supported container run-time, such as Docker (Microsoft / Ubuntu) or Podman (Red Hat).
 
-A single Kubernetes cluster consists of one or more Master nodes, the so-called Control Plane, and one or more worker nodes, the Execution Plane. Most commonly, there are three nodes in the control plane, and three or more nodes in the execution plane, sometimes with different sizing or capabilities. An odd number of nodes should be chosen for the control plane because the underlying etcd database is a distributed system and needs to reach quorum on startup.
+A single Kubernetes cluster has a Control Plane and an Execution Plane. Usually, there are three nodes in the control plane and one or more nodes in the execution plane. For the control plane, you should choose an odd number of nodes because the underlying etcd database is a distributed system and needs to reach quorum on startup. The number of worker nodes in the execution plane only depends on the needs of your application.
 
-The Kubernetes control plane takes care of orchestrating the application deployments and maintains their state; on the other hand, the worker nodes execute the actual application containers as defined and scheduled by the control plane. Worker nodes can be organized into one or more node pools, to separate hardware features or reliability aspects.
+The Kubernetes control plane takes care of orchestrating the application deployments and maintains their state; on the other hand, the worker nodes execute the actual application containers as defined and scheduled by the control plane. Worker nodes can be organized into one or more node pools to separate hardware features or reliability aspects.
 
-Kubernetes, in itself, is also a containerized application.
-
-In addition to providing compute nodes, Kubernetes provides an overlay network that allows communication between the cluster nodes, invisible to the outside world, and ingress controllers for inbound network access to the running applications. Persistent storage, even though it's an anathema to stateless, cloud-native computing, is provided through persistent volumes and storage classes and linked to the underlying cloud provider.
+In addition to providing compute nodes, Kubernetes includes overlay networks to allow communication between the cluster nodes, and ingress controllers for inbound network access to the running applications. Persistent storage, even though it's an anathema to stateless, cloud-native computing, is provided through persistent volumes and storage classes and linked to the underlying cloud provider.
 
 All administrative access to a given Kubernetes cluster is via the master nodes and its Kubernetes API endpoint.
 
@@ -66,10 +66,10 @@ Rancher is, similar to Kubernetes, itself a containerized application and can be
 
 For production installations, Rancher can be installed on a separate Kubernetes cluster, using Kubernetes' redundancy mechanisms for high-availability and resiliency. It could either be co-hosted on an existing cluster or better, on a small, separate infrastructure cluster. Installation on a separate cluster is the recommended choice. It is good practice in IT to keep administrative tools on separate infrastructure from the administered infrastructure, and thus the installation on a different cluster is the most widespread.
 
-In addition to the GUI, the Rancher server also provides a central Kubernetes API endpoint, which acts as an intermediary between the users and the actual Kubernetes clusters and prevents unauthorized access.
+In addition to the GUI, the Rancher server also provides a central Kubernetes API endpoint, which prevents unauthorized access and sits as an intermediary between the users and the actual Kubernetes clusters.
 
 You can find more details on the Rancher architecture in Rancher's technical architecture document.\footnote{See \textit{Rancher Labs (2020)}: Rancher Technical Architecture. \cite{technicalArchitecture}}
 
 The open-source Kubernetes run-time threat detection engine Falco works very well with Rancher.\footnote{See \textit{Shankar, P. (2020)}: Runtime Security in Rancher with Falco. \cite{falcoPsp}}
 
-I've covered the aspect of cluster and workload segmentation in more detail in my previous FOM paper on multi-cluster management in Enterprise IT, in combination with a deeper introduction into Kubernetes itself.\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} I've also made the point in that paper as to why I view the combination of Kubernetes and Rancher as a very beneficial one, especially for Enterprise IT.
+I've covered the aspect of cluster and workload segmentation in more detail in my previous FOM paper on multi-cluster management in Enterprise IT. I've also explained in that paper as to why I view the combination of Kubernetes and Rancher as a very beneficial one, especially for Enterprise IT.\footnote{See \textit{Frank, C. (2020)}: Multi-Cluster Management fuer Containerumgebungen .\cite{previousPaper}} 
