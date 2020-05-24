@@ -72,7 +72,7 @@ To mitigate the failed control, what we need to do is to add a default Pod Secur
 
 We can do that by adding the following line to our template definition in Terraform:
 
-\begin{lstlisting}[caption=Cluster Template, frame=single, basicstyle=\ttfamily]
+\begin{lstlisting}[caption=Cluster Template with PSP, frame=single, basicstyle=\ttfamily]
 default_pod_security_policy_template_id = "restricted"
 \end{lstlisting}
 
@@ -87,4 +87,4 @@ Or, if your prefer the Rancher GUI, you can set the default Pod Security Policy 
 
 Once you've enabled the PSP, the control will pass in the CIS scan. It's an iterative process: Based on your IT organization's needs, you'll have to identify the controls critical for your business and implement the remediation steps one by one, as needed, to harden your cluster.
 
-Automated CIS scans will then give you a precious tool to check all your Kubernetai regularly for security issues and regulatory compliance, and help you to act on issues accordingly.
+Automated CIS scans will then give you a valuable tool to check all your Kubernetai regularly for security issues and regulatory compliance, and help you to act on issues accordingly.
