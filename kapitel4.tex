@@ -11,9 +11,9 @@
 
 In the previous chapter, we've covered the necessary mechanism to codify and enforce standards for our Kubernetai across our IT organization, using Terraform and Rancher templates. Now let's move one step further and look at checking our clusters for security issues.
 
-There are many security standards and recommendations for IT, but there is one organization that's universally recognized as leading the field of IT security and compliance: The Center for Internet Security, Inc. (CIS®)
+There are many security standards and recommendations for IT, but there is one organization that's universally recognized as leading the field of IT security and compliance: The Center for Internet Security, Inc. (CIS\textsuperscript{\textregistered})
 
-CIS is a community-driven nonprofit and responsible for CIS Controls® and CIS Benchmarks™, which are globally recognized as the best practices for securing IT systems and data. If you want to look at the actual CIS Benchmarks, they are available for download on the CIS website; you'll need to register with CIS first, though.
+CIS is a community-driven nonprofit and responsible for CIS Controls\textsuperscript{\textregistered} and CIS Benchmarks \texttrademark, which are globally recognized as the best practices for securing IT systems and data. If you want to look at the actual CIS Benchmarks, they are available for download on the CIS website; you'll need to register with CIS first, though.
 
 Testing a platform against a CIS Benchmark is usually a lengthy process. Fortunately, there are several automated scan tools available for Kubernetes, and with Rancher 2.4, a CIS Scan is now available for all managed Clusters right from the Rancher GUI.
 
@@ -66,7 +66,10 @@ There are many controls within a Pod Security Policy that we won't cover in this
 
 The scan gives us the following remediation instruction:
 
-\verb|Remediation: Follow the documentation and create Pod Security Policy objects as per your environment|
+\begin{verbatim}
+Remediation: Follow the documentation and create Pod 
+Security Policy objects as per your environment   
+\end{verbatim}
 
 To mitigate the failed control, what we need to do is to add a default Pod Security Policy. Fortunately, that's relatively easy in Rancher. In the cluster template, we need to enable PSP support and define the default policy.
 
